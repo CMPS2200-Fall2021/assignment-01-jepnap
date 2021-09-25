@@ -16,11 +16,14 @@ def longest_run(mylist, key):
     lister = []
     j = 0
     for i in range(len(mylist)):
-        if key == mylist[i]:
+        if key == mylist[i] and i != len(mylist) - 1:
             j+=1
         elif key != mylist[i]:
             lister.append(j)
             j = 0
+        elif key == mylist[i] and i == len(mylist) - 1:
+            j+=1 
+            lister.append(j)
     c = 0 
     for i in range(len(lister)):
         if lister[c] < lister[i]:
@@ -77,8 +80,11 @@ def longest_run_recursive(mylist, key):
 ## Feelgeniusee to add your own tests here.
 def test_longest_run():
     assert longest_run([2,12,12,8,12,12,12,0,12,1], 12) == 3
-
+    assert longest_run([12,12,12,8,12,12,0,12,1], 12) == 3
+    assert longest_run([12,12,12,8,12,12,0,12,12,12,12], 12) == 4
 #rint(foo(3))
 #print(longest_run([2,12,12,8,12,12,12,0,12,1], 12))
 #print(longest_run_recursive([2,12,12,8,12,12,12,0,12,1], 1))
-print(longest_run([12,12,12,8,12,12,0,12,12,12,12], 12))
+#print(longest_run([12,12,12,8,12,12,0,12,12,12,12], 12))
+#test_longest_run()
+print(5)
