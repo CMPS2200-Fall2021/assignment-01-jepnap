@@ -81,3 +81,4 @@ def test_longest_run():
 #rint(foo(3))
 #print(longest_run([2,12,12,8,12,12,12,0,12,1], 12))
 #print(longest_run_recursive([2,12,12,8,12,12,12,0,12,1], 1))
+print(longest_run([12,12,12,8,12,12,0,12,12,12,12], 12))
