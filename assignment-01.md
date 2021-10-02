@@ -2,12 +2,12 @@
 
 # CMPS 2200 Assignment 1
 
-**Name:**_________________________
+**Name:**________Justin Phillips_________________
 
 
 In this assignment, you will learn more about asymptotic notation, parallelism, functional languages, and algorithmic cost models. As in the recitation, some of your answer will go here and some will go in `main.py`. You are welcome to edit this `assignment-01.md` file directly, or print and fill in by hand. If you do the latter, please scan to a file `assignment-01.pdf` and push to your github repository. 
   
-  
+  MY WORK IS HANDWRITTEN AND IN THE FILE "assignment-01*.pdf"
 
 1. **Asymptotic notation**
 
