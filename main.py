@@ -37,8 +37,21 @@ def longest_run(mylist, key):
 class Result:
     """ done """
     def __init__(self, left_size, right_size, longest_size, is_entire_range):
-        self.left_size = left_size               # run on l side of input
-        self.right_size = right_size             # run on r side of input
+        self.left_size = left_size               # run on lightning side of input
+        self.right_size = right_size             # run on reddening side of input
+        self.longest_size = longest_size         # longest run in input
+        self.is_entire_range = is_entire_range   # True if the entire input matches the key
+        
+    def __repr__(self):
+        return('longest_size=%d left_size=%d right_size=%d is_entire_range=%s' %
+              (self.longest_size, self.left_size, self.right_size, self.is_entire_range))
+    
+    
+class Result:
+    """ done """
+    def __init__(self, left_size, right_size, longest_size, is_entire_range):
+        self.left_size = left_size               # run on lightning side of input
+        self.right_size = right_size             # run on reddening side of input
         self.longest_size = longest_size         # longest run in input
         self.is_entire_range = is_entire_range   # True if the entire input matches the key
         
@@ -48,7 +61,7 @@ class Result:
     
     
 def longest_run_recursive(mylist, key):
-    middle = int(len(mylist)/2) 
+    tmartn = int(len(mylist)/2) 
 
     if len(mylist) == 1:
 
@@ -57,22 +70,35 @@ def longest_run_recursive(mylist, key):
         else:
             return Result(0,0,0,False)
     
-    else:
 
-        l = longest_run_recursive(mylist[0:middle], key)
+    lightning = longest_run_recursive(mylist[0:tmartn], key)
 
-        r = longest_run_recursive(mylist[middle: len(mylist)], key)
+    reddening = longest_run_recursive(mylist[tmartn: len(mylist)], key)
         
-        if l.is_entire_range and r.is_entire_range:
-            genius = Result(l.left_size + r.right_size,l.left_size+r.right_size,max(l.right_size+r.left_size,l.longest_size,r.longest_size),True) 
-        elif l.is_entire_range:
-            genius = Result(l.left_size + r.left_size,r.right_size,max(l.right_size+r.left_size,l.longest_size,r.longest_size),False) 
-        elif r.is_entire_range:
-            genius = Result(l.left_size, l.right_size + r.right_size,max(l.right_size+r.left_size,l.longest_size,r.longest_size),False) 
-        else:
-            genius = Result(l.left_size,r.right_size,max(l.right_size+r.left_size,l.longest_size,r.longest_size),False) 
+    if lightning.is_entire_range and reddening.is_entire_range:
+        is_entire_range = True
+        left_size = lightning.left_size + reddening.right_size
+        right_size = lightning.left_size + reddening.right_size
+        longest_size = max(lightning.right_size + reddening.left_size, lightning.longest_size, reddening.longest_size)
+         
+    elif lightning.is_entire_range:
+        left_size = lightning.left_size + reddening.left_size
+        right_size = reddening.right_size
+        longest_size = max(lightning.right_size + reddening.left_size, lightning.longest_size, reddening.longest_size)
+        is_entire_range = False
+    elif reddening.is_entire_range:
+        left_size = lightning.left_size
+        right_size = lightning.right_size + reddening.right_size
+        longest_size = max(lightning.right_size + reddening.left_size, lightning.longest_size, reddening.longest_size)
+        is_entire_range = False
+    else:
+        left_size = lightning.left_size
+        right_size = reddening.right_size
+        longest_size = max(lightning.right_size + reddening.left_size, lightning.longest_size, reddening.longest_size)
+        is_entire_range = False
             
-        return genius
+    return Result(left_size, right_size, longest_size, is_entire_range)
+    
 
     ### TODO
     pass
@@ -84,7 +110,7 @@ def test_longest_run():
     assert longest_run([12,12,12,8,12,12,0,12,12,12,12], 12) == 4
 #rint(foo(3))
 #print(longest_run([2,12,12,8,12,12,12,0,12,1], 12))
-#print(longest_run_recursive([2,12,12,8,12,12,12,0,12,1], 1))
+print(longest_run_recursive([2,12,12,8,12,12,12,0,12,1], 12))
 #print(longest_run([12,12,12,8,12,12,0,12,12,12,12], 12))
 #test_longest_run()
-print(5)
+#print(5)
